@@ -1,6 +1,7 @@
 import Shimmer from "./Shimmer";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import { useParams } from "react-router-dom"
+import RestaurantCategory from "./RestaurantCategory";
   
 const RestaurantMenu = () =>{
 
@@ -15,8 +16,10 @@ const RestaurantMenu = () =>{
     console.log(resInfo);
     const values = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
     const {name,area,completeAddress} = values[values.length-1]?.card?.card;
-    const items = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards;
-    // console.log(items);
+    const items = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
+    // console.log(items)
+    const categories = items.filter(c=>c?.card?.card?.["@type"]==="type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory")
+    // console.log("cato",categories); 
 
     if(items===undefined){
         return(
@@ -25,19 +28,12 @@ const RestaurantMenu = () =>{
     }
 
     return(
-        <div className="m-5">
-            <h1 className="font-bold underline">{name},{area}</h1>
-            <h5 className="font-semibold">{completeAddress}</h5>
+        <div className="m-5 text-center">
+            <h1 className="font-bold underline my-5 text-2xl">{name},{area}</h1>
+            <h5 className="font-semibold text-lg">{completeAddress}</h5>
             <br></br>
-            <h2 className="underline font-semibold">Menu</h2>
-            <ul className="ml-5 mt-4">
-                {
-                    items.map(item=>
-                        <li className="" key={item.id}>{item.card.info.name}--Rs.{item.card.info.price/100}</li>
-                        // console.log(item)
-                    )
-                }
-            </ul>
+            {/* {here we are building accordion} */}
+            {categories.map((category) => (<RestaurantCategory key="" data={category?.card?.card}/>))}
         </div>
     )
 }
