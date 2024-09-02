@@ -2,15 +2,17 @@ import { useState,useEffect } from "react";
 import Shimmer from "./Shimmer" 
 import { Link } from "react-router-dom";
 import { swiggyData } from "../utils/links";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard,{withPromotedLabel} from "./RestaurantCard";
 
 const Body = () =>{
     const [AllRestaurants,setAllRestaurants] = useState([]);
     const [listOfRestaurant,setlistOfRestaurant] = useState([]);
     const [searchText,setSearchText] = useState("");
 
+    const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
+
     useEffect(()=>{
-        fetchData();
+        fetchData(); 
     },[])
     
     const fetchData = async() =>{
@@ -25,6 +27,7 @@ const Body = () =>{
     if(listOfRestaurant.length===0){
         return <Shimmer />
     }
+
 
     return(
 
@@ -46,7 +49,7 @@ const Body = () =>{
                 }}>All Restaurants</button>
                 <button className="border-solid border-2 border-black rounded-md m-2 p-1" onClick={()=>{
                     const filterones = AllRestaurants.filter((rest)=>{
-                        return rest.info.avgRating>=4.5;
+                        return rest.info.avgRating>4.3;
                     })
                     setlistOfRestaurant(filterones);
                 }}>Top Rated Restaurants</button>
@@ -55,7 +58,14 @@ const Body = () =>{
                 {
                     listOfRestaurant.map(restaurant=>(
                         // <RestaurantCard resdata={restaurant} key={restaurant.info.id} />
-                        <Link className="bg-slate-50 text-center m-1 p-1.5 h-auto w-56 hover:border-solid hover:border-2 hover:border-black" key={restaurant.info.id} to={"/restaurants/"+restaurant.info.id}><RestaurantCard resdata={restaurant} /></Link>
+                        <Link className="bg-slate-50 text-center m-1 p-1.5 h-auto w-56 hover:border-solid hover:border-2 hover:border-black" key={restaurant.info.id} to={"/restaurants/"+restaurant.info.id}>
+                            {/* <RestaurantCard resdata={restaurant} /> */}
+                            {
+                                restaurant.info.avgRating >= 4.6 
+                                ? <RestaurantCardPromoted resdata={restaurant} /> 
+                                : <RestaurantCard resdata={restaurant} />
+                            }
+                        </Link>
                     ))
                 }
             </div>
