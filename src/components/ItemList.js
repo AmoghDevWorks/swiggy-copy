@@ -1,7 +1,7 @@
 import { IMAGE_URL } from "../utils/links";
 
 const ItemList = ({items}) =>{
-    console.log("items",items);
+    // console.log("items",items);
     return(
         <div>
             {
@@ -12,9 +12,9 @@ const ItemList = ({items}) =>{
                             <p>Rating:{item?.card?.info?.ratings?.aggregatedRating?.rating}</p>
                             <p>Price:Rs.{(item?.card?.info?.price||item?.card?.info?.defaultPrice)/100}</p>
                         </div>
-                        <div className="flex flex-col align-center justify-between">
+                        <div className="relative flex flex-col align-center justify-between">
                             <img className="h-full rounded-md w-1/2 object-fill" src={IMAGE_URL+item?.card?.info?.imageId}></img>
-                            <button className="absolute h-fit w-fit p-0.5 rounded-md bg-green-400 text-white font-semibold font-sans">Add+</button>
+                            <button className="bottom-0 left-1/4 absolute h-fit w-fit p-0.5 rounded-md bg-green-400 text-white font-semibold font-sans">Add+</button>
                         </div>
                     </div>
                 ))
