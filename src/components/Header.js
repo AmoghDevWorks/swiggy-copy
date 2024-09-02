@@ -1,10 +1,12 @@
-import React,{useState} from "react";
+import React,{useContext, useState} from "react";
 import useOnlineStatus from "../utils/useOnlineStatus"
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext";
 
 const Heading = () =>{
     const [btnState,setbtnState] = useState("LOGIN");
     const onlineStatus = useOnlineStatus();
+    const {loggedInUser} = useContext(UserContext);
 
     return(
         <div className="bg-green-200 w-full h-16 flex justify-between align-center p-2">
@@ -24,6 +26,7 @@ const Heading = () =>{
                             setbtnState("LOGIN")
                         }
                     }}>{btnState}</button>
+                    <li className="p-1 font-semibold capitalize">{loggedInUser}</li>
                 </ul>
             </div>
         </div>

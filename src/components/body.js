@@ -1,7 +1,9 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect, useContext } from "react";
 import Shimmer from "./Shimmer" 
 import { Link } from "react-router-dom";
 import { swiggyData } from "../utils/links";
+import UserContext from "../utils/UserContext";
+import useOnlineStatus from "../utils/useOnlineStatus";
 import RestaurantCard,{withPromotedLabel} from "./RestaurantCard";
 
 const Body = () =>{
@@ -23,6 +25,15 @@ const Body = () =>{
         setAllRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setlistOfRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
     }
+
+    const onlineStatus = useOnlineStatus();
+    if(onlineStatus===false)
+        return(
+            <div className="font-bold m-5 font-sans">Looks like you're offline, please check your internet connection</div>
+        )
+    
+    const {setUserName,loggedInUser} = useContext(UserContext);
+
 
     if(listOfRestaurant.length===0){
         return <Shimmer />
@@ -53,6 +64,12 @@ const Body = () =>{
                     })
                     setlistOfRestaurant(filterones);
                 }}>Top Rated Restaurants</button>
+                <div>
+                    <label>UserName:</label>
+                    <input type="text" className="m-2 border-solid border-2 rounded-md border-black p-1 w-56" value={loggedInUser} onChange={(e)=>{
+                        setUserName(e.target.value)
+                    }}/>
+                </div>
             </div>
             <div className="w-full h-full flex flex-wrap">
                 {

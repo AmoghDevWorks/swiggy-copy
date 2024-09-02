@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Heading from "./Header";
 import Body from "./body";
@@ -8,13 +8,26 @@ import ContactUs from "./ContactUs";
 import Grocery from "./Grocery";
 import Error from "./Error";
 import RestaurantMenu from "./RestaurantMenu";
+import UserContext from "../utils/UserContext";
 
 const Structure = () =>{
+    const [userName,setUserName] = useState("default user");
+
+    useEffect(()=>{
+        //consider a API call
+        const data = {
+            name:"Amogh Kashyap",
+        }
+        setUserName(data.name);
+    },[])
+
     return(
-        <div>
-            <Heading />
-            <Outlet />
-        </div>
+        <UserContext.Provider value={{loggedInUser:userName,setUserName}}>
+            <div>
+                <Heading />
+                <Outlet />
+            </div>
+        </UserContext.Provider>
     )
 }
 
