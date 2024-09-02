@@ -3,7 +3,7 @@ import { IMAGE_URL } from "../utils/links";
 const ItemList = ({items}) =>{
     // console.log("items",items);
     return(
-        <div>
+        <div className="shadow-xl">
             {
                 items.map((item) =>(
                     <div className="border-b-2 border-b-slate-500 h-fit w-full flex align-center justify-between p-2 hover:border-solid hover:border-2 hover:border-black hover:rounded-md" key={item?.card?.info?.id}>

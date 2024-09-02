@@ -1,25 +1,10 @@
 import ItemList from "./ItemList";
-import { useState } from "react";
 
 const RestaurantCategory = (props) =>{
-    const [showItems,setShowItems] = useState(false);
 
     // console.log("prps",props);
     const handleClick = () =>{
-        const arrow = document.getElementById("arrow");
-        if(arrow.textContent=="↑"){
-            arrow.textContent = "↓"
-        }
-        else{
-            arrow.textContent = "↑";
-        }
-
-        if(showItems){
-            setShowItems(false);
-        }
-        else if(!showItems){
-            setShowItems(true);
-        }
+        props.setshowIndex();
     }
 
     return(
@@ -31,7 +16,7 @@ const RestaurantCategory = (props) =>{
                     <span id="arrow">&#8595;</span>
                 </div>
                 {/* accordion body */}
-                {showItems && <ItemList items={props.data.categories[0].itemCards} />}
+                {props?.showItems && <ItemList items={props.data.categories[0].itemCards} />}
             </div>
         </div>
     )
