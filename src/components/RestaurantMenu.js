@@ -15,7 +15,7 @@ const RestaurantMenu = () =>{
         return <Shimmer />
     }
 
-    console.log(resInfo);
+    // console.log(resInfo);
     const values = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
     const {name,area,completeAddress} = values[values.length-1]?.card?.card;
     const items = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;

@@ -2,11 +2,18 @@ import React,{useContext, useState} from "react";
 import useOnlineStatus from "../utils/useOnlineStatus"
 import { Link } from "react-router-dom";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Heading = () =>{
     const [btnState,setbtnState] = useState("LOGIN");
     const onlineStatus = useOnlineStatus();
     const {loggedInUser} = useContext(UserContext);
+
+    //selector--subscribing to store using selector
+    const cartItems = useSelector((store)=>
+        store.cart.items
+    )
+
 
     return(
         <div className="bg-green-200 w-full h-16 flex justify-between align-center p-2">
@@ -18,6 +25,7 @@ const Heading = () =>{
                     <li className="p-1"><Link to="/about">ABOUT</Link></li>
                     <li className="p-1"><Link to="/contactus">CONTACT US</Link></li>
                     <li className="p-1"><Link to="/grocery">GROCERY</Link></li>
+                    <li className="p-1"><Link to="/cart">CART({cartItems.length})</Link></li>
                     <button className="border-solid border-black border-2 p-1 rounded-md" onClick={()=>{
                         if(btnState==="LOGIN"){
                             setbtnState("LOGOUT");
