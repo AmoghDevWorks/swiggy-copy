@@ -2,6 +2,7 @@ import {RESCARD_URL} from "../utils/links";
 
 const RestaurantCard = (props) =>{
     const {resdata} = props;
+    // console.log(resdata);
     
     return(
         <div className="h-full flex align-center justify-between flex-col gap-3">
