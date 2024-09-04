@@ -7,4 +7,20 @@ test("should load contact us component",()=>{
 
     const heading = screen.getByRole("heading");
     expect(heading).toBeInTheDocument();
+});
+
+test("should load button",()=>{
+    render(<ContactUs />);
+
+    const button = screen.getByRole("button");
+
+    expect(button).toBeInTheDocument();
+})
+
+test("Loaded 2 input boxes",()=>{
+    render(<ContactUs />);
+
+    const input = screen.getAllByRole("textbox");
+
+    expect(input.length).toBe(2);
 })
