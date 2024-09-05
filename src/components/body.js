@@ -75,7 +75,7 @@ const Body = () =>{
                 {
                     listOfRestaurant.map(restaurant=>(
                         // <RestaurantCard resdata={restaurant} key={restaurant.info.id} />
-                        <Link className="bg-slate-50 text-center m-1 p-1.5 h-auto w-56 hover:border-solid hover:border-2 hover:border-black" key={restaurant.info.id} to={"/restaurants/"+restaurant.info.id}>
+                        <Link data-testid="resCard" className="bg-slate-50 text-center m-1 p-1.5 h-auto w-56 hover:border-solid hover:border-2 hover:border-black" key={restaurant.info.id} to={"/restaurants/"+restaurant.info.id}>
                             {/* <RestaurantCard resdata={restaurant} /> */}
                             {
                                 restaurant.info.avgRating >= 4.6 
